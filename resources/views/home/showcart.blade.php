@@ -20,6 +20,32 @@
       <link href="home/css/style.css" rel="stylesheet" />
       <!-- responsive style -->
       <link href="home/css/responsive.css" rel="stylesheet" />
+
+      <style type="text/css">
+        .center{
+            margin: auto;
+            width: 50%;
+            text-align: center;
+            padding: 30px;
+           
+        }
+        .img_deg{
+            height: 100px;
+            width: 100px;
+        }
+        .fon{
+            font-size: 25px;
+            padding: 20px;
+        }
+        table,th,td{
+            border: 2px solid grey;
+        }
+        .total_des{
+            font-size: 30px;
+            padding: 30px;
+        }
+
+      </style>
    </head>
    <body>
       @if(session()->has('message'))
@@ -34,23 +60,45 @@
       <div class="hero_area">
          @include('home.header')
          <!-- end header section -->
-         <!-- slider section -->
-         @include('home.slider')
-         <!-- end slider section -->
-      </div>
-      <!-- why section -->
-      @include('home.why')
-      <!-- end why section -->
       
-      <!-- arrival section -->
-      @include('home.arival')
-      <!-- end product section -->
+     <div class="center">
+        <table>
+            <tr>
+                <th class="fon">Product Title</th>
+                <th class="fon">Quantity</th>
+                <th class="fon">Price</th>
+                <th class="fon">Image</th>
+                <th class="fon">Action</th>
+            </tr>
 
-      <!-- subscribe section -->
-      @include('home.subscribe')
-      <!-- end subscribe section -->
-      @include('home.client')
-      <!-- end client section -->
+            <?php $totalprice=0; ?>
+
+            @foreach($cart as $cart)
+            <tr>
+                <td>{{$cart->product_title}}</td>
+                <td>{{$cart->quantity}}</td>
+                <td>₱{{$cart->price}}</td>
+                <td><img class="img_deg" src="/product/{{$cart->image}}" alt=""></td>
+                <td><a href="{{url('remove_cart',$cart->id)}}" onclick="return confirm('Are you sure you want to remove this product?')" class="btn btn-danger">Remove</a></td>
+
+            </tr>
+
+            <?php $totalprice=$totalprice + $cart->price ?>
+
+            @endforeach
+        </table>
+        <div>
+            <h1 class="total_des">Total Price: ₱{{$totalprice}}</h1>
+        </div>
+
+        <div>
+            <h1 style="font-size: 25px; padding-bottom:15px;">Proceed to Order</h1>
+            <a href="{{url('cash_order')}}" class="btn btn-danger">Cash on Delivery</a>
+            <a href="{{url('stripe', $totalprice)}}" class="btn btn-danger">Pay Using Card</a>
+        </div>
+
+
+     </div>
       @include('home.footer')
       <!-- footer end -->
       <div class="cpy_">
