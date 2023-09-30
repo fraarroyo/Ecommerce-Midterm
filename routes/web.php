@@ -25,7 +25,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-route::get('/redirect',[HomeController::class,'redirect']);
+route::get('/redirect',[HomeController::class,'redirect'])->middleware('auth','verified');
 
 route::get('/view_category',[AdminController::class,'view_category']);
 route::post('/add_category',[AdminController::class,'add_category']);
@@ -46,3 +46,4 @@ Route::post('stripe/{totalprice}',[HomeController::class, 'stripePost'])->name('
 route::get('/order',[AdminController::class,'order']);
 route::get('/delivered/{id}',[AdminController::class,'delivered']);
 route::get('/print_pdf/{id}',[AdminController::class,'print_pdf']);
+route::get('/send/{id}',[AdminController::class,'send']);
