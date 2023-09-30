@@ -11,7 +11,7 @@
       <meta name="description" content="" />
       <meta name="author" content="" />
       <link rel="shortcut icon" href="images/favicon.png" type="">
-      <title>Famms - Fashion HTML Template</title>
+      <title>Lazhopee</title>
       <!-- bootstrap core css -->
       <link rel="stylesheet" type="text/css" href="home/css/bootstrap.css" />
       <!-- font awesome style -->
@@ -61,32 +61,36 @@
          @include('home.header')
          <!-- end header section -->
       
-     <div class="center">
-        <table>
-            <tr>
-                <th class="fon">Product Title</th>
-                <th class="fon">Quantity</th>
-                <th class="fon">Price</th>
-                <th class="fon">Image</th>
-                <th class="fon">Action</th>
-            </tr>
+         <div class="center">
+         <a><h1 style=" color: black; font-size:50px; text-align:center; border: 3px solid white;"><img width="70" style="display: inline-block; padding-right:20px;" src="images\Cart.png">Cart</h1></a>
+               
+                <table class="table">
+                    <tr class="th p-4">
+                        <th>Product Title</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Image</th>
+			            <th>Action</th>
+                    </tr>
 
-            <?php $totalprice=0; ?>
+                    <?php $totalprice=0; ?>
 
-            @foreach($cart as $cart)
-            <tr>
-                <td>{{$cart->product_title}}</td>
-                <td>{{$cart->quantity}}</td>
-                <td>₱{{$cart->price}}</td>
-                <td><img class="img_deg" src="/product/{{$cart->image}}" alt=""></td>
-                <td><a href="{{url('remove_cart',$cart->id)}}" onclick="return confirm('Are you sure you want to remove this product?')" class="btn btn-danger">Remove</a></td>
+                    @foreach($cart as $cart)
+                    <tr>
+                        <td>{{$cart->product_title}}</td>
+                        <td>{{$cart->quantity}}</td>
+                        <td>{{$cart->price}}</td>
+                        <td>
+                            <img style="width: 15%; height:auto; margin:auto;" src="/product/{{$cart->image}}" alt="">
+                        </td>
+                        <td><a href="{{url('remove_cart',$cart->id)}}" onclick="return confirm('Are you sure you want to remove this product?')" class="btn btn-danger">Remove</a></td>
+                
+                     </tr>
+            
+                    <?php $totalprice=$totalprice + $cart->price ?>
 
-            </tr>
-
-            <?php $totalprice=$totalprice + $cart->price ?>
-
-            @endforeach
-        </table>
+                     @endforeach
+                 </table>
         <div>
             <h1 class="total_des">Total Price: ₱{{$totalprice}}</h1>
         </div>
