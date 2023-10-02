@@ -45,10 +45,41 @@
       <!-- arrival section -->
       @include('home.arival')
       <!-- end product section -->
+    <div style="text-align:center; padding-bottom:20px;">  
+      <div>
+         <h1 style="font-size: 40px; text-align:center; padding-top:20px; font-weight:bolder; color:#002147;">Comments</h1>
+      </div>
+      <form action="">
+         <textarea style="height: 150px; width:600px;" placeholder="Your comment here..."></textarea><br>
+         <a href="" class="btn btn-primary" style="align-items:center;">Send Comment</a>
+      </form>
+    </div>
+   <div style="padding-left: 25%;">
+      <div>
+         <h1 style="font-size: 30px; padding-bottom: 20px; font-weight:bolder; color:#002147; padding-top:20px;">All Comments</h1>
 
+      </div>
+    
+   
+    <div>
+         <b>Francis</b>
+         <p>comment</p>
+
+         <a class="btn btn-primary" href="javascript::void(0);">Reply</a>
+      </div>
+      <br>
+      <div>
+         <textarea style="height: 150px; width:600px;" placeholder="Reply Here..."></textarea>
+      </div>
+      <a class="btn btn-primary" href="javascript::void(0);">Reply</a>
+   </div>
+   </div>
       <!-- subscribe section -->
       @include('home.subscribe')
       <!-- end subscribe section -->
+
+     
+
       @include('home.client')
       <!-- end client section -->
       @include('home.footer')

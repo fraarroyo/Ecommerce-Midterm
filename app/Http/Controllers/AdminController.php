@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Category;
-use App\Models\Product;
 use App\Models\Order;
+use App\Models\Product;
+use App\Notifications\SendEmailNotification;
+use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification as NotificationsNotification;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 use PDF;
+use Notification;
 
 class AdminController extends Controller
 {
@@ -132,5 +135,13 @@ class AdminController extends Controller
         return view('admin.email_info',compact('order'));
     }
 
+    public function searchdata(Request $request){
+        $searchText=$request->search;
 
+        $order=order::where('name','Like',"%$searchText%")->orWhere('phone','Like',"%$searchText%")->
+        orWhere('phone','Like',"%$searchText%")->orWhere('phone','Like',"%$searchText%")->orWhere('product_title','Like',"%$searchText%")
+        ->orWhere('email','Like',"%$searchText%")->get();
+
+        return view('admin.order',compact('order'));
+    }
 }

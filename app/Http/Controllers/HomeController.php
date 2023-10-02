@@ -22,9 +22,25 @@ class HomeController extends Controller
     {
         $usertype=Auth::user()->usertype;
 
+
         if($usertype=='1')
         {
-            return view('admin.home');
+            $total_product=product::all()->count();
+            $total_order=order::all()->count();
+            $total_user=user::all()->count();
+
+            $order=order::all();
+
+            $total_revenue=0;
+
+            foreach($order as $order){
+                $total_revenue=$total_revenue + $order->price;
+            }
+
+            $cod_order=order::where('payment_status','=','cash on delivery')->get()->count();
+            $stripe_order=order::where('payment_status','=','paid')->get()->count();
+
+            return view('admin.home',compact('total_product','total_order','total_user','total_revenue','cod_order','stripe_order'));
         }else{
             $product=Product::paginate(10);
             return view('home.userpage', compact('product'));
@@ -168,6 +184,29 @@ class HomeController extends Controller
         Session::flash('success', 'Payment successful!');
               
         return back();
+    }
+
+    public function show_order(){
+        if(Auth::id()){
+
+            $user=Auth::user();
+
+            $userid=$user->id;
+            $order=order::where('user_id','=',$userid)->get();
+
+            return view('home.order',compact('order'));
+        } else {
+            return redirect('login');
+        }
+    }
+
+    public function cancel_order($id){
+
+        $order=order::find($id);
+        $order->delivery_status='Order Cancelled';
+        $order->save();
+
+        return redirect()->back();
     }
 }
 

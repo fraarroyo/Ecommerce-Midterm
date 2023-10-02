@@ -47,3 +47,6 @@ route::get('/order',[AdminController::class,'order']);
 route::get('/delivered/{id}',[AdminController::class,'delivered']);
 route::get('/print_pdf/{id}',[AdminController::class,'print_pdf']);
 route::get('/send/{id}',[AdminController::class,'send']);
+route::get('/search',[AdminController::class,'searchdata']);
+route::get('/show_order',[HomeController::class,'show_order']);
+route::get('/cancel_order/{id}',[HomeController::class,'cancel_order']);
