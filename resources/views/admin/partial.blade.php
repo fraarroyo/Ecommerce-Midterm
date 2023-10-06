@@ -25,6 +25,10 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
+                
+                <li class="nav-item"> <a class="nav-link" href="{{url('/sports')}}">Sports</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{url('/technologies')}}">Technologies</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{url('/fashion')}}">Fashion</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{url('/view_product')}}">Add Products</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{url('/show_product')}}">Show all Products</a></li>
               </ul>
